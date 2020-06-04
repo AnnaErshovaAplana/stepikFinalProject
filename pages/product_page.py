@@ -1,12 +1,10 @@
-from pages.base_page import BasePage
+from .base_page import BasePage
 from .locators import ProductPageLocators
 
 class ProductPage(BasePage):
     def add_to_cart(self):
         add_to_cart_button = self.browser.find_element(*ProductPageLocators.ADD_TO_CART_BUTTON)
         add_to_cart_button.click()
-        # получаем результат математического выражения в консоль и отправляем его во всплыв окне
-        BasePage.solve_quiz_and_get_code(self)
         self.browser.implicitly_wait(5)
 
 
@@ -22,3 +20,11 @@ class ProductPage(BasePage):
         product_price_in_cart_text = self.browser.find_element(*ProductPageLocators.PRODUCT_ADDED_PRICE).text
         #  Сообщение со стоимостью корзины. Стоимость корзины совпадает с ценой товара
         assert product_price_on_page_text == product_price_in_cart_text
+
+    def should_not_be_message_on_product_added_to_cart(self):
+        assert self.is_element_not_present(*ProductPageLocators.PRODUCT_ADD_TO_CARD_MESSAGE), \
+            "Success message present, but should not be"
+
+    def should_message_on_product_added_to_cart_disappear(self):
+        assert self.has_element_disappeared(*ProductPageLocators.PRODUCT_ADD_TO_CARD_MESSAGE), \
+            "Success message present, but should disappear"

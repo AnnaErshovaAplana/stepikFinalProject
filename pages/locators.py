@@ -16,3 +16,4 @@ class ProductPageLocators():
     PRODUCT_PRODUCT_PAGE_PRICE = (By.CSS_SELECTOR, '.product_main .price_color')
     PRODUCT_ADDED_TITLE = (By.CSS_SELECTOR, '.alert-success .alertinner strong')
     PRODUCT_ADDED_PRICE = (By.CSS_SELECTOR, '.alert-info .alertinner strong')
+    PRODUCT_ADD_TO_CARD_MESSAGE = (By.CSS_SELECTOR, '.alert-info .alertinner')
