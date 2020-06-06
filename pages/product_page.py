@@ -21,9 +21,11 @@ class ProductPage(BasePage):
         #  Сообщение со стоимостью корзины. Стоимость корзины совпадает с ценой товара
         assert product_price_on_page_text == product_price_in_cart_text
 
+
     def should_not_be_message_on_product_added_to_cart(self):
         assert self.is_element_not_present(*ProductPageLocators.PRODUCT_ADD_TO_CARD_MESSAGE), \
             "Success message present, but should not be"
+
 
     def should_message_on_product_added_to_cart_disappear(self):
         assert self.has_element_disappeared(*ProductPageLocators.PRODUCT_ADD_TO_CARD_MESSAGE), \
