@@ -6,15 +6,11 @@ from .pages.product_page import ProductPage
 from .pages.base_page import BasePage
 import time
 
-#помечаем упавший тест xfail
-#@pytest.mark.parametrize('offer_number', ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"])
+@pytest.mark.need_review
 #прогоняем ссылки с параметром offer_number от 0 до 10 и помечаем ссылку 7 xfail
-#@pytest.mark.parametrize('offer_number', [pytest.param(i, marks=pytest.mark.xfail(i==7, reason="bugged link")) for i in range(10)])
+@pytest.mark.parametrize('offer_number', [pytest.param(i, marks=pytest.mark.xfail(i==7, reason="bugged link")) for i in range(10)])
 def test_guest_can_add_product_to_basket(browser, offer_number):
-   link = f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{offer_number}"
-
-def test_guest_can_add_product_to_basket(browser):
-    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
+    link = f"http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{offer_number}"
     page = ProductPage(browser,link)  # инициализируем Page Object,передаем в конструктор экземпляр драйвера и url адрес
     page.open()  # открываем страницу
     page.add_to_cart()
@@ -53,6 +49,7 @@ def test_guest_should_see_login_link_on_product_page(browser):
     page.open()
     page.should_be_login_link()
 
+@pytest.mark.need_review
 def test_guest_can_go_to_login_page_from_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
     page = ProductPage(browser, link)
@@ -61,7 +58,7 @@ def test_guest_can_go_to_login_page_from_product_page(browser):
     page = LoginPage(browser,link)
     page.should_be_login_url()
 
-
+@pytest.mark.need_review
 def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     # Гость открывает страницу товара
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
@@ -93,8 +90,7 @@ class TestUserAddToBasketFromProductPage():
         login_page_with_user.check_if_logged_in()
         login_page_with_user.should_not_be_login_url()
 
-
-
+    @pytest.mark.need_review
     def test_user_can_add_product_to_basket(self, browser):
         link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
         page = ProductPage(browser, link)  # инициализируем Page Object,передаем в конструктор экземпляр драйвера и url адрес
